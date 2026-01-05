@@ -1,48 +1,63 @@
-# textkit — Learning C Through a Growing Unix-Style Tool
+# textkit — Preparing for Systems Programming with C
 
-This repository contains **textkit**, a small command-line utility written in C that I am building **incrementally while working through _The C Programming Language (K&R, 2nd Edition)_**.
+This repository contains **textkit**, a small command-line utility written in C that I am building while working through **_The C Programming Language (Kernighan & Ritchie, 2nd Edition)_**.
 
-The goal of this project is **not** to build something large all at once, but to:
-- deeply understand C
-- learn Unix-style program design
-- practice systems-level thinking
-- grow one codebase alongside the book’s chapters
+The primary goal of this project is **to be prepared for a systems programming course**, not to build a fully polished tool upfront.
+
+This project is intentionally **incremental, constrained, and learning-focused**.
 
 ---
 
-## Project Philosophy
+## Project Goals (Short-Term)
 
-- One project, extended chapter by chapter
-- Each new feature corresponds directly to concepts learned in the book
-- No skipping fundamentals, no frameworks
-- Focus on clarity, correctness, and simplicity
+**Before the semester starts (2–3 weeks):**
+- Become fluent with basic C syntax and control flow
+- Understand functions, headers, and multi-file programs
+- Gain *real exposure* to pointers and arrays
+- Write, debug, and refactor real C code
+- Be able to follow systems programming lectures without panic
 
-This mirrors how real Unix utilities are written and how systems programming is taught.
+**During the semester:**
+- Continue extending `textkit`
+- Deepen understanding of pointers, structs, and I/O
+- Refactor code as new concepts are learned in class
 
 ---
 
-## What `textkit` Will Become
+## What `textkit` Is
 
-By the end of the book, `textkit` will be a small suite of text-processing tools similar to:
-
+`textkit` is a small Unix-style text utility inspired by tools like:
 - `wc` (word/line/character counting)
 - `grep` (pattern matching)
-- word frequency analysis
-- file and stdin/stdout support
-- proper Unix exit codes
-- optional low-level I/O using system calls
+- simple word-frequency analysis
+
+The project grows **only as new concepts are learned** — no features are added prematurely.
 
 ---
 
-## Chapter Roadmap
+## Scope and Constraints
+
+To stay focused and realistic:
+
+- Early chapters may use a **single file**
+- No external libraries or frameworks
+- No premature optimization
+- No dynamic memory until the book introduces it
+- Correctness and understanding matter more than feature count
+
+---
+
+## Chapter Roadmap (Pre-Semester Focus)
 
 ### Chapter 1 — A Tutorial Introduction
-**Features**
-- Read from standard input
-- Count characters, words, and lines
-- Print results to stdout
+**Objective:** Write and understand a complete C program.
 
-**Concepts**
+**Features**
+- Read text from standard input
+- Count characters, words, and lines
+- Print results to standard output
+
+**Key Concepts**
 - `main`
 - loops
 - `getchar`
@@ -51,206 +66,73 @@ By the end of the book, `textkit` will be a small suite of text-processing tools
 ---
 
 ### Chapter 2 — Types, Operators, Expressions
+**Objective:** Think precisely about data and conditions.
+
 **Features**
 - Count digits, whitespace, and other characters
-- Use correct numeric types (`int`, `long`)
-- More detailed statistics output
+- Use appropriate numeric types (`int`, `long`)
+- More detailed output
 
 ---
 
 ### Chapter 3 — Control Flow
+**Objective:** Control program behavior using arguments and branching.
+
 **Features**
-- Command-line flags (`-l`, `-w`, `-c`)
-- Mode selection (e.g. `wc`, `hist`)
-- Basic argument parsing via `argv`
+- Basic command-line flags (`-l`, `-w`, `-c`)
+- Manual parsing of `argv`
+- Graceful handling of invalid input
 
 ---
 
 ### Chapter 4 — Functions and Program Structure
+**Objective:** Write maintainable, modular C programs.
+
 **Features**
 - Break logic into reusable functions
-- Multiple source files (`.c`) and headers (`.h`)
-- Cleaner program organization
-
----
-
-### Chapter 5 — Pointers and Arrays
-**Features**
-- Rewrite string and input logic using pointers
-- Pointer-based iteration instead of indexing
-- More efficient text handling
-
----
-
-### Chapter 6 — Structures
-**Features**
-- Define structs to represent words and counts
-- Store and manage structured data
-- Word frequency tracking
-
----
-
-### Chapter 7 — Input and Output
-**Features**
-- Read from files as well as stdin
-- Handle multiple input files
-- Proper error handling for file I/O
-
----
-
-### Chapter 8 — The UNIX System Interface
-**Features**
-- Optional low-level I/O (`read`, `write`)
-- Unix-style exit codes
-- Behavior consistent with real Unix utilities
-
----
-
-## Implementation Notes (Guided, Not Prescriptive)
-
-The following notes describe *how* each chapter’s features should be approached, without giving full solutions. The intent is to encourage reasoning and reference back to the book.
-
----
-
-### Chapter 1 — A Tutorial Introduction
-
-**Approach**
-- Read input one character at a time from `stdin`
-- Detect word boundaries using whitespace
-- Increment counters as characters are processed
-
-**Constraints**
-- No arrays or pointers yet
-- No file input
-- No dynamic memory
-
-**Hints**
-- Use a state variable to track “inside a word”
-- Stop reading on `EOF`
-
----
-
-### Chapter 2 — Types, Operators, Expressions
-
-**Approach**
-- Classify characters using conditionals or `switch`
-- Maintain multiple counters simultaneously
-- Use appropriate numeric types for large input
-
-**Constraints**
-- Continue using character-by-character input
-- Avoid library classification functions (e.g. `isdigit`)
-
-**Hints**
-- Refer to the digit/whitespace examples in the chapter
-- Be careful with operator precedence
-
----
-
-### Chapter 3 — Control Flow
-
-**Approach**
-- Examine `argv` to determine program mode
-- Enable or disable output based on flags
-- Use branching logic to control execution paths
-
-**Constraints**
-- Manual argument parsing (no helper libraries)
-- Assume well-formed input initially
-
-**Hints**
-- Treat flags as boolean switches
-- Handle invalid flags gracefully
-
----
-
-### Chapter 4 — Functions and Program Structure
-
-**Approach**
-- Extract logical units into separate functions
-- Introduce header files to share declarations
+- Split code into multiple `.c` and `.h` files
 - Separate input handling from computation
 
-**Constraints**
-- No global variables unless necessary
-- Keep function interfaces minimal
-
-**Hints**
-- Reuse function patterns from K&R (e.g. `getline`)
-- Compile with warnings enabled
+📌 This chapter marks the transition from “toy programs” to real C programs.
 
 ---
 
-### Chapter 5 — Pointers and Arrays
+### Chapter 5 — Pointers and Arrays (Critical)
+**Objective:** Build a correct mental model of memory.
 
-**Approach**
-- Rewrite array-based logic using pointer arithmetic
-- Pass pointers instead of array indices
-- Manipulate strings directly via pointers
+**Features**
+- Rewrite string and input logic using pointers
+- Pass arrays and strings to functions correctly
+- Debug pointer-related bugs intentionally
 
-**Constraints**
-- Avoid allocating memory dynamically yet
+📌 Mastery is not expected here — **exposure and reasoning are the goal**.
+
+---
+
+## Implementation Guidance (High-Level)
+
+These notes guide *how to think*, not what to copy.
+
+### Input Handling
+- Start with character-by-character input
 - Use fixed-size buffers
+- Avoid dynamic allocation until later
 
-**Hints**
-- Remember: array names decay to pointers
-- Prefer pointer increment over index math
+### Program Structure
+- Let structure emerge naturally
+- Refactor only when complexity demands it
+- Keep responsibilities clear and narrow
 
----
-
-### Chapter 6 — Structures
-
-**Approach**
-- Define structs to group related data
-- Store word text alongside frequency counts
-- Operate on arrays of structs
-
-**Constraints**
-- Fixed-size storage initially
-- No hash tables yet
-
-**Hints**
-- Think about ownership of string data
-- Keep struct responsibilities narrow
+### Debugging
+- Expect bugs, especially with pointers
+- Use compiler warnings aggressively
+- Reason about memory instead of guessing
 
 ---
 
-### Chapter 7 — Input and Output
+## Build & Run
 
-**Approach**
-- Add support for file input using `FILE *`
-- Process multiple files sequentially
-- Fallback to `stdin` when no file is provided
-
-**Constraints**
-- One input source at a time
-- Clear error messages on failure
-
-**Hints**
-- Centralize input logic
-- Check return values of all I/O calls
-
----
-
-### Chapter 8 — The UNIX System Interface
-
-**Approach**
-- Introduce an alternative I/O path using system calls
-- Use buffered reads for performance
-- Return meaningful exit codes
-
-**Constraints**
-- Keep stdio-based implementation intact
-- Do not mix stdio and low-level I/O in the same path
-
-**Hints**
-- Treat file descriptors as integers
-- Model behavior after real Unix utilities
-
----
-
-## Build & Run (will evolve)
-
+Early chapters:
 ```bash
 gcc main.c -o textkit
 ./textkit
